@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Friend Finder - Survey</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Friend Finder</h1>
+            <h3>Fill out the form and get a match!</h3>
+            <!--<hr>-->
+            <!--<a href="/"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-eye-open"></span> View Characters</button></a>-->
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Survey</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="POST" role="form">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="image">Image (link)</label>
+                                <input type="text" class="form-control" id="image">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionOne">Question 1</label>
+                                <select id="questionOne" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionTwo">Question 2</label>
+                                <select id="questionTwo" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionThree">Question 3</label>
+                                <select id="questionThree" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionFour">Question 4</label>
+                                <select id="questionFour" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionFive">Question 5</label>
+                                <select id="questionFive" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionSix">Question 6</label>
+                                <select id="questionSix" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionSeven">Question 7</label>
+                                <select id="questionSeven" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionEight">Question 8</label>
+                                <select id="questionEight" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionNine">Question 9</label>
+                                <select id="questionNine" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="questionTen">Question 10</label>
+                                <select id="questionTen" class="form-control">
+                                    <!--<option selected>Choose...</option>-->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                </select>
+                            </div>
+
+                        </form>
+                        <br>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="glyphicon glyphicon-fire"></span> Add to the Force</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        //Form submission
+        $("#add-btn").on("click", function(event) {
+            event.preventDefault();
+
+            //String default, Number to convert for later comparison.
+            var surveyResult = {
+                "name": $("#name").val().trim(),
+                "image": $("#image").val().trim(),
+                "scores": [
+                    Number($("#questionOne").val()),
+                    Number($("#questionTwo").val()),
+                    Number($("#questionThree").val()),
+                    Number($("#questionFour").val()),
+                    Number($("#questionFive").val()),
+                    Number($("#questionSix").val()),
+                    Number($("#questionSeven").val()),
+                    Number($("#questionEight").val()),
+                    Number($("#questionNine").val()),
+                    Number($("#questionTen").val())
+                ]
+            };
+
+            // console.log(surveyResult);
+
+
+            $.post("/api/friends", surveyResult)
+                .done(function(data) {
+                    console.log(data);
+                    alert("Adding character...");
+                });
+        });
+    </script>
+
+</body>
+
+</html>
