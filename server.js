@@ -32,55 +32,42 @@ app.get('/', function(request, response) {
 
 // API Routes:
 app.get('/api/friends', function(request, response) {
-    response.json( /*TODO JSON of all friends from ./app/data/friends.js */ );
+    response.json(friends);
 });
 
 app.post('/api/friends', function(request, response) {
     var newFriend = request.body;
-    console.log(newFriend);
-    console.log("Old Friends =");
-    console.log(friends);
-    //TODO compare newFriend's scores to others
-    //TODO Show modal of closest match
+    var lowestScore = Number.MAX_VALUE;
+    var bestMatch;
+
+    // Unnecessary, but let's make sure we're storing it with integer scores.
+    for (let i in newFriend.scores) {
+        newFriend.scores[i] = Number(newFriend.scores[i]);
+    }
+
+    // Sum the difference in score values, keeping the friend with the closest match.
+    for (let i in friends) {
+        var currentScore = 0;
+        for (let j in friends[i].scores) {
+            currentScore += Math.abs(friends[i].scores[j] - newFriend.scores[j]);
+        }
+        if (currentScore < lowestScore) {
+            lowestScore = currentScore;
+            bestMatch = friends[i];
+        }
+    }
+    // Return the best match
+    response.json(bestMatch);
+
+    // Store the submission
+    friends.push(newFriend);
 });
 
 
 //catchall route
-
 app.all('*', function(request, response) {
     response.redirect('/');
 });
-
-// Search for Specific Character (or all characters) - provides JSON
-// app.get("/api/:characters?", function(request, response) {
-//   var chosen = request.params.characters;
-
-//   if (chosen) {
-//     console.log(chosen);
-
-//     for (var i = 0; i < characters.length; i++) {
-//       if (chosen === characters[i].routeName) {
-//         return response.json(characters[i]);
-//       }
-//     }
-//     return response.json(false);
-//   }
-//   return response.json(characters);
-// });
-
-// Create New Characters - takes in JSON input
-// app.post("/api/new", function(request, response) {
-//   // request.body hosts is equal to the JSON post sent from the user
-//   // This works because of our body-parser middleware
-//   var newcharacter = request.body;
-//   newcharacter.routeName = newcharacter.name.replace(/\s+/g, "").toLowerCase();
-
-//   console.log(newcharacter);
-
-//   characters.push(newcharacter);
-
-//   response.json(newcharacter);
-// });
 
 // Starts the server to begin listening
 // =============================================================
@@ -88,6 +75,3 @@ app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 
 });
-
-console.log("Old Friends =");
-console.log(friends);

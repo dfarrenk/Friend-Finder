@@ -152,16 +152,46 @@
                         </form>
                         <br>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="glyphicon glyphicon-fire"></span> Add to the Force</button>
+                            <button type="submit" class="btn btn-primary btn-md" id="add-btn"><span class="glyphicon glyphicon-fire"></span>Submit</button>
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Match Result</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-5">
+                        <img src="" alt="Match Image" id="friend-image" width="160">
+                    </div>
+                    <div class="col-sm-7">
+                        <p>Your new friend: <span id="friend-name">...</span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
+        function setModal(image, name) {
+            $("#friend-image").attr('src', image);
+            $("#friend-name").text(name);
+            $('#myModal').modal();
+        }
+        //setModal("https://pbs.twimg.com/profile_images/848471660860538880/pevXVsIp.jpg", "Grumpy Cat");
+
         //Form submission
         $("#add-btn").on("click", function(event) {
             event.preventDefault();
@@ -171,27 +201,37 @@
                 "name": $("#name").val().trim(),
                 "image": $("#image").val().trim(),
                 "scores": [
-                    Number($("#questionOne").val()),
-                    Number($("#questionTwo").val()),
-                    Number($("#questionThree").val()),
-                    Number($("#questionFour").val()),
-                    Number($("#questionFive").val()),
-                    Number($("#questionSix").val()),
-                    Number($("#questionSeven").val()),
-                    Number($("#questionEight").val()),
-                    Number($("#questionNine").val()),
-                    Number($("#questionTen").val())
+                    $("#questionOne").val(),
+                    $("#questionTwo").val(),
+                    $("#questionThree").val(),
+                    $("#questionFour").val(),
+                    $("#questionFive").val(),
+                    $("#questionSix").val(),
+                    $("#questionSeven").val(),
+                    $("#questionEight").val(),
+                    $("#questionNine").val(),
+                    $("#questionTen").val()
                 ]
             };
 
-            // console.log(surveyResult);
+            console.log(surveyResult);
 
+            $.ajax({
+                type: "POST",
+                url: "/api/friends",
+                traditional: true,
+                // data: JSON.stringify(surveyResult)
+                data: surveyResult
+            }).done(function(data) {
+                setModal(data.image, data.name);
+            });
 
-            $.post("/api/friends", surveyResult)
-                .done(function(data) {
-                    console.log(data);
-                    alert("Adding character...");
-                });
+            // $.post("/api/friends", (surveyResult))
+            //     .done(function(data) {
+            //         console.log(data);
+            //         alert("Adding friend...");
+            //     });
+
         });
     </script>
 
