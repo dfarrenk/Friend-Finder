@@ -4,10 +4,6 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 
-// Internal Dependencies
-// =============================================================
-var friends = require("./app/data/friends.js");
-
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -17,61 +13,77 @@ var PORT = process.env.PORT || 8080;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// HTML Routes:
-app.get('/survey', function(request, response) {
-    response.sendFile(path.join(__dirname, "/app/public/survey.html"));
-});
+// Route redirection
+app.use(express.static(path.join(__dirname, '/app/public')));
 
-app.get('/', function(request, response) {
-    response.sendFile(path.join(__dirname, "/app/public/home.html"));
-});
+// Path files
+require('./app/routing/apiRoutes.js')(app);
+require('./app/routing/htmlRoutes.js')(app);
 
-// app.get('*', function(request, response) {
-//     response.redirect('/');
+
+// app.all('*', function(request, response) {
+//     console.log(request._parsedUrl.path);
+//     switch (request._parsedUrl.path) {
+//     default:
+//     }
+
 // });
 
-// API Routes:
-app.get('/api/friends', function(request, response) {
-    response.json(friends);
-});
 
-app.post('/api/friends', function(request, response) {
-    var newFriend = request.body;
-    var lowestScore = Number.MAX_VALUE;
-    var bestMatch;
+// // HTML Routes:
+// app.get('/survey', function(request, response) {
+//     response.sendFile(path.join(__dirname, "/app/public/survey.html"));
+// });
 
-    // Unnecessary, but let's make sure we're storing it with integer scores.
-    for (let i in newFriend.scores) {
-        newFriend.scores[i] = Number(newFriend.scores[i]);
-    }
+// app.get('/', function(request, response) {
+//     response.sendFile(path.join(__dirname, "/app/public/home.html"));
+// });
 
-    // Sum the difference in score values, keeping the friend with the closest match.
-    for (let i in friends) {
-        var currentScore = 0;
-        for (let j in friends[i].scores) {
-            currentScore += Math.abs(friends[i].scores[j] - newFriend.scores[j]);
-        }
-        if (currentScore < lowestScore) {
-            lowestScore = currentScore;
-            bestMatch = friends[i];
-        }
-    }
-    // Return the best match
-    response.json(bestMatch);
+// // app.get('*', function(request, response) {
+// //     response.redirect('/');
+// // });
 
-    // Store the submission
-    friends.push(newFriend);
-});
+// // API Routes:
+// app.get('/api/friends', function(request, response) {
+//     response.json(friends);
+// });
+
+// app.post('/api/friends', function(request, response) {
+//     var newFriend = request.body;
+//     var lowestScore = Number.MAX_VALUE;
+//     var bestMatch;
+
+//     // Unnecessary, but let's make sure we're storing it with integer scores.
+//     for (let i in newFriend.scores) {
+//         newFriend.scores[i] = Number(newFriend.scores[i]);
+//     }
+
+//     // Sum the difference in score values, keeping the friend with the closest match.
+//     for (let i in friends) {
+//         var currentScore = 0;
+//         for (let j in friends[i].scores) {
+//             currentScore += Math.abs(friends[i].scores[j] - newFriend.scores[j]);
+//         }
+//         if (currentScore < lowestScore) {
+//             lowestScore = currentScore;
+//             bestMatch = friends[i];
+//         }
+//     }
+//     // Return the best match
+//     response.json(bestMatch);
+
+//     // Store the submission
+//     friends.push(newFriend);
+// });
 
 
-//catchall route
-app.all('*', function(request, response) {
-    response.redirect('/');
-});
+// //catchall route
+// app.all('*', function(request, response) {
+//     response.redirect('/');
+// });
 
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
-
 });
